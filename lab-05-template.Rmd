@@ -218,10 +218,12 @@ candy_rankings %>%
 Are chocolate candies more likely to be candy bars? Make a filled bar plot with chocolate on the x-axis and fill = bar. Describe what you see.
 
 ```{r}
-# Your code here
-
+candy_rankings %>%
+  ggplot() + 
+  geom_bar(aes(x = chocolate,
+               fill = bar))
 ```
-
+Of the candies that are not chocolate, the vast majority are also not candy bars. Of the candies that are chocolate, a slim majority are candy bars. Chocolate candies are more likely to be candy bars
 
 ## Exercise 8
 Create a new variable called price per sugar ratio as the division of pricepercent and sugarpercent. Plot it against winpercent, and set the color of all points to blue for the competitors who are not "One dime" or "One quarter". Include x and y labels and a title. Describe any relationship you see.
