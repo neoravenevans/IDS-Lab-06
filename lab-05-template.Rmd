@@ -229,7 +229,21 @@ Of the candies that are not chocolate, the vast majority are also not candy bars
 Create a new variable called price per sugar ratio as the division of pricepercent and sugarpercent. Plot it against winpercent, and set the color of all points to blue for the competitors who are not "One dime" or "One quarter". Include x and y labels and a title. Describe any relationship you see.
 
 ```{r}
-# your code here
+candy_ppsr <- candy_rankings %>%
+  mutate(pricepersugarratio = pricepercent / sugarpercent)
+
+candy_ppsr %>%
+  ggplot() +
+  geom_point(aes(x = pricepersugarratio,
+                 y = winpercent * 100,
+                 colour = case_when(competitorname == "One dime" ~ "pink",
+                                    competitorname == "One quarter" ~ "purple",
+                                    TRUE ~ "blue"))) +
+  scale_colour_manual(values = c("lightblue", "purple", "blue")) +
+  labs(title = "Price per Sugar Ratio against Win %",
+       x = "Price per Sugar Ratio",
+       y = "Win %") + 
+  theme(legend.position = "none")
 
 ```
 
