@@ -130,11 +130,12 @@ How about using the both variables; chocolate vs winpercent? Run the following i
 Fill in the blanks, remove the # symbol in front of your code and the execute the code chunk via green play button.
 
 ```{r}
-# Your code here
-#ggplot(candy_df, aes(x = ___________)) +
-#  geom_histogram() +
-#  facet_wrap(___________)
-
+ggplot(candy_df, aes(x = winpercent)) +
+  geom_histogram() +
+  facet_wrap(vars(chocolate)) +
+  labs(title = "Win % vs Chocolate",
+       x = "Win %",
+       y = "Count")
 ```
 
 
@@ -145,8 +146,23 @@ Fill in the blanks, remove the # symbol in front of your code and the execute th
 Create a visualization that examines the relationship between a candy’s win percentage and whether it contains chocolate. Include x and y labels and a title. Describe any relationship you see.
 
 ```{r}
-# your code here
+candy_rankings %>%
+  ggplot() + 
+  geom_boxplot(aes(x = chocolate,
+                   y = winpercent,
+                   fill = chocolate))
 
+candy_rankings %>%
+  ggplot() + 
+  geom_boxplot(aes(x = caramel,
+                   y = winpercent,
+                   fill = caramel))
+
+candy_rankings %>%
+  ggplot() + 
+  geom_boxplot(aes(x = fruity,
+                   y = winpercent,
+                   fill = fruity))
 ```
 
 - Consider the similar pair by replacing chocolate with caramel, fruity and compare their results. 
@@ -155,6 +171,22 @@ Create a visualization that examines the relationship between a candy’s win pe
 ```{r}
 candy_rankings %>%
   group_by(chocolate) %>%
+  summarise(
+    n = n(),
+    mean_win = mean(winpercent),
+    median_win = median(winpercent)
+  )
+
+candy_rankings %>%
+  group_by(caramel) %>%
+  summarise(
+    n = n(),
+    mean_win = mean(winpercent),
+    median_win = median(winpercent)
+  )
+
+candy_rankings %>%
+  group_by(fruity) %>%
   summarise(
     n = n(),
     mean_win = mean(winpercent),
