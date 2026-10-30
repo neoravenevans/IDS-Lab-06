@@ -83,7 +83,7 @@ glimpse(candy_df)
 How many observations and variables are in this dataset?
 Did you identify the type of variables, remember that this detail is crucial to create which kind of data visualization in general. 
 
-_Write your comments about results_
+There are 85 rows and 13 columns. Most of the columns are Boolean values indicating whether a candy contains a certain element. There are 3 numerical values in addition: Sugar, Price and Win. There is also a character variable containing the name of the candy.
 
 # Data viz - One variable at a time
 
@@ -99,8 +99,11 @@ candy_df <- candy_df %>%
 Complete the following code to get the data viz to represent "how many candies contain caramel via bar plot". Fill in the blanks, remove the # symbol in front of your code and the execute the code chunk via green play button.
 
 ```{r}
-# ggplot(candy_rankings, aes(x = ______)) +
-#  _____() +
+ggplot(candy_rankings, aes(x = caramel)) +
+  geom_bar() +
+  labs(x = "Caramel",
+       y = "Count",
+       title = "Candies which contain caramel vs not")
 ```
 
 ## Exercise 3
@@ -108,10 +111,15 @@ Complete the following code to get the data viz to represent "how many candies c
 Now look at a numerical variable, such as `winpercent`. Create an histogram for this variable using ggplot2 functions below. Include informative x and y labels and a title, as a good practice.
 
 ```{r}
-# Your code here
-
+candy_rankings %>%
+  ggplot() +
+  geom_histogram(aes(x = pricepercent * 100)) + 
+  labs(x = "Price %",
+       y = "Count",
+       title = "Histogram of Price %")
 ```
 
+There are clear groups where prices gather around certain values. There is also a peak at around 50%
 
 # Data viz - more than one variable
 
